@@ -1,4 +1,5 @@
 const gravatar = require('gravatar');
+const normalize = require('normalize-url');
 const Users = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
@@ -20,11 +21,14 @@ const sendToken = async function(user, statusCode, res) {
 exports.register = asyncHandler(async (req, res, next) => {
   const { name, email, password, role, passwordConfirm } = req.body;
 
-  const avatar = gravatar.url(email, {
-    s: '200',
-    r: 'pg',
-    d: 'mm'
-  });
+  const avatar = normalize(
+    gravatar.url(email, {
+      s: '200',
+      r: 'pg',
+      d: 'mm'
+    }),
+    { forceHttps: true }
+  );
 
   const user = await Users.create({
     name,
