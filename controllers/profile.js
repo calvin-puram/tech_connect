@@ -232,7 +232,7 @@ exports.githubProfile = asyncHandler(async (req, res, next) => {
   );
   const headers = {
     'user-agent': 'node.js',
-    Authorization: `token ${process.env.githubToken}`
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
   };
 
   const gitHubResponse = await axios.get(uri, { headers });

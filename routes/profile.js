@@ -17,7 +17,7 @@ const {
 
 router.get('/', getProfiles);
 router.get('/user/:user_id', getSingleProfile);
-router.get('github/:username', githubProfile);
+router.get('/github/:username', githubProfile);
 
 router.use(protect);
 router.get('/me', getProfile);
@@ -26,6 +26,6 @@ router.delete('/', deleteProfile);
 router.put('/experience', updateExperience);
 router.delete('/experience/:exp_id', deleteExperience);
 router.put('/education', updateEducation);
-router.put('/education/:edu_id', deleteEducation);
+router.delete('/education/:edu_id', deleteEducation);
 
 module.exports = router;
