@@ -57,12 +57,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   const user = await Users.findOne({ email }).select('+password');
 
   if (!user || !(await user.comparePassword(user.password, password))) {
-    return next(
-      new ErrorResponse(
-        'Invalid Credencials or email not Registered on this platform',
-        401
-      )
-    );
+    return next(new ErrorResponse('Invalid Credencials', 401));
   }
 
   sendToken(user, 200, res);

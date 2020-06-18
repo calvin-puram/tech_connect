@@ -1,11 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const dispatch = useDispatch();
+
   const { email, password } = formData;
 
   const handleFormLogin = e => {
@@ -18,9 +22,9 @@ const Login = () => {
       email,
       password
     };
-    console.log(data);
+
     //send to DB
-    setFormData({ email: '', password: '' });
+    dispatch(login(data));
   };
 
   return (

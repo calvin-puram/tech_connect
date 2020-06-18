@@ -29,6 +29,13 @@ export const auth = (state = initState, action) => {
         loading: false,
         isAuthenticated: true
       };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        token: action.payload,
+        isAuthenticated: true,
+        loading: false
+      };
     case AUTH_ERROR:
     case LOGOUT:
       return {

@@ -50,3 +50,21 @@ export const register = data => async dispatch => {
     }
   }
 };
+
+export const login = data => async dispatch => {
+  const body = JSON.stringify(data);
+  try {
+    const res = await api.post('/auth/login', body);
+    if (res && res.data.success) {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data.token
+      });
+
+      dispatch(loadUser());
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch(setAlert(errors, 'danger'));
+  }
+};

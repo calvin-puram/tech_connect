@@ -32,7 +32,6 @@ const Register = () => {
       };
       //send to DB
       dispatch(register(data));
-      setFormData({ name: '', email: '', password: '', password2: '' });
     }
   };
 
