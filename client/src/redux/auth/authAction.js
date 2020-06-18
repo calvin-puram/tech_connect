@@ -68,3 +68,9 @@ export const login = data => async dispatch => {
     dispatch(setAlert(errors, 'danger'));
   }
 };
+
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
+};
