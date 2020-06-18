@@ -4,7 +4,7 @@
   "description": "DevCoach Fullstack App",
   "author": "calvin Job <puram.calvin@gmail.com>",
   "scripts": {
-    "client": "npm run serve --prefix client",
+    "client": "npm start --prefix client",
     "client-install": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server",
