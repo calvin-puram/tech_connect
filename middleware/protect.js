@@ -11,7 +11,14 @@ exports.protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET);
+    let decode;
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return next(new ErroResponse('Token is not valid ', 401));
+      }
+      decode = decoded;
+    });
     req.user = await User.findById(decode.id);
 
     next();

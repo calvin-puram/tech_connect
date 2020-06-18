@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,9 @@ const Register = () => {
     password: '',
     password2: ''
   });
+
+  const dispatch = useDispatch();
+
   const { name, email, password, password2 } = formData;
 
   const handleFormRegister = e => {
@@ -26,6 +31,7 @@ const Register = () => {
         passwordConfirm: password2
       };
       //send to DB
+      dispatch(register(data));
       setFormData({ name: '', email: '', password: '', password2: '' });
     }
   };
