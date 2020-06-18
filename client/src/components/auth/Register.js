@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -15,15 +16,18 @@ const Register = () => {
 
   const handleRegisterSubmit = e => {
     e.preventDefault();
-    const data = {
-      name,
-      email,
-      password,
-      passwordConfirm: password2
-    };
-
-    console.log(data);
-    setFormData({ name: '', email: '', password: '', password2: '' });
+    if (password !== password2) {
+      alert('password do not match');
+    } else {
+      const data = {
+        name,
+        email,
+        password,
+        passwordConfirm: password2
+      };
+      //send to DB
+      setFormData({ name: '', email: '', password: '', password2: '' });
+    }
   };
 
   return (
@@ -49,6 +53,7 @@ const Register = () => {
             placeholder="Email Address"
             name="email"
             value={email}
+            required
             onChange={handleFormRegister}
           />
           <small className="form-text">
@@ -62,6 +67,7 @@ const Register = () => {
             placeholder="Password"
             name="password"
             minLength="6"
+            required
             value={password}
             onChange={handleFormRegister}
           />
@@ -72,6 +78,7 @@ const Register = () => {
             placeholder="Confirm Password"
             name="password2"
             minLength="6"
+            required
             value={password2}
             onChange={handleFormRegister}
           />
@@ -79,7 +86,7 @@ const Register = () => {
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
-        Already have an account? <a href="login.html">Sign In</a>
+        Already have an account? <Link to="/login">Sign In</Link>
       </p>
     </Fragment>
   );
