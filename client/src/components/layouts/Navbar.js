@@ -1,16 +1,19 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import arrow from '../../arrow.svg';
+
 import { logout } from '../../redux';
 
 const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const authLinks = (
     <ul>
       <li>
-        <a href="#!" onClick={logout} className="logout">
+        <i className="fas fa-user" /> <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
+        <a href="#!" onClick={logout}>
+          <i className="fas fa-sign-out-alt" />{' '}
           <span className="hide-sm">Logout</span>
-          <img src={arrow} alt="arrow" />
         </a>
       </li>
     </ul>
