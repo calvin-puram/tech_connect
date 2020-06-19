@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, setAlert } from '../../redux';
-import PropTypes from 'prop-types';
 import Alert from '../layouts/Alert';
 
 const Register = props => {
@@ -96,12 +95,6 @@ const Register = props => {
       </p>
     </Fragment>
   );
-};
-
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default Register;

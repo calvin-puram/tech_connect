@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 const Alert = () => {
   const alert = useSelector(state => state.alert.error);
@@ -12,7 +11,4 @@ const Alert = () => {
   );
 };
 
-Alert.propTypes = {
-  alert: PropTypes.object.isRequired
-};
 export default Alert;
