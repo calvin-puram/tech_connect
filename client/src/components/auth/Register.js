@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { register, setAlert } from '../../redux';
 import PropTypes from 'prop-types';
 import Alert from '../layouts/Alert';
@@ -12,7 +12,7 @@ const Register = props => {
     password: '',
     password2: ''
   });
-
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
   const { name, email, password, password2 } = formData;
@@ -34,9 +34,12 @@ const Register = props => {
       };
       //send to DB
       dispatch(register(data));
-      // props.history.push('/');
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Fragment>
@@ -97,7 +100,8 @@ const Register = props => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default Register;
