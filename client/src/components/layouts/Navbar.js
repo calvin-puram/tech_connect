@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { logout } from '../../redux';
 
@@ -56,6 +57,11 @@ const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout())
   };
+};
+
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
