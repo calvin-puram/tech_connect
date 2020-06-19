@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Landing = () => {
   const { isAuthenticated, loading } = useSelector(state => state.auth);
@@ -30,6 +31,11 @@ const Landing = () => {
       </div>
     </section>
   );
+};
+
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default Landing;
