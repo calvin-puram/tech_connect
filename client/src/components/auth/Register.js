@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux';
+import { register, setAlert } from '../../redux';
+import PropTypes from 'prop-types';
+import Alert from '../layouts/Alert';
 
-const Register = () => {
+const Register = props => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +24,7 @@ const Register = () => {
   const handleRegisterSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      alert('password do not match');
+      dispatch(setAlert('password do not match', 'danger'));
     } else {
       const data = {
         name,
@@ -32,11 +34,13 @@ const Register = () => {
       };
       //send to DB
       dispatch(register(data));
+      // props.history.push('/');
     }
   };
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
@@ -47,7 +51,6 @@ const Register = () => {
             type="text"
             placeholder="Name"
             name="name"
-            required
             value={name}
             onChange={handleFormRegister}
           />
@@ -58,7 +61,6 @@ const Register = () => {
             placeholder="Email Address"
             name="email"
             value={email}
-            required
             onChange={handleFormRegister}
           />
           <small className="form-text">
@@ -71,8 +73,6 @@ const Register = () => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
-            required
             value={password}
             onChange={handleFormRegister}
           />
@@ -82,8 +82,6 @@ const Register = () => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
-            required
             value={password2}
             onChange={handleFormRegister}
           />
@@ -95,6 +93,11 @@ const Register = () => {
       </p>
     </Fragment>
   );
+};
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
 export default Register;

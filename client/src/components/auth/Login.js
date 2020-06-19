@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux';
+import Alert from '../layouts/Alert';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ const Login = () => {
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Sign into Your Account
@@ -40,7 +42,6 @@ const Login = () => {
             placeholder="Email Address"
             name="email"
             value={email}
-            required
             onChange={handleFormLogin}
           />
         </div>
@@ -49,8 +50,6 @@ const Login = () => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
-            required
             value={password}
             onChange={handleFormLogin}
           />
