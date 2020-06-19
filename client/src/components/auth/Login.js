@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux';
 import Alert from '../layouts/Alert';
+import PropTypes from 'prop-types';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -67,6 +68,10 @@ const Login = () => {
       </p>
     </Fragment>
   );
+};
+
+Login.propTypes = {
+  isAuthenticated: PropTypes.bool
 };
 
 export default Login;
