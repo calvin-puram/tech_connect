@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createProfile } from '../../redux';
 import PropTypes from 'prop-types';
+import Alert from '../layouts/Alert';
 
 const CreateProfile = ({ history }) => {
   const [toggleSocial, setToggleSocial] = useState(false);
@@ -47,6 +49,7 @@ const CreateProfile = ({ history }) => {
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Create Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
@@ -211,9 +214,9 @@ const CreateProfile = ({ history }) => {
           </Fragment>
         )}
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
-        </a>
+        </Link>
       </form>
     </Fragment>
   );

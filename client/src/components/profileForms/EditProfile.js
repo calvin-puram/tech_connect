@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createProfile, getProfile } from '../../redux';
 import PropTypes from 'prop-types';
+import Alert from '../layouts/Alert';
 
 const EditProfile = ({ history }) => {
   const [toggleSocial, setToggleSocial] = useState(false);
@@ -40,7 +42,7 @@ const EditProfile = ({ history }) => {
       youtube: loading || !profile.social ? '' : profile.social.youtube,
       instagram: loading || !profile.social ? '' : profile.social.instagram
     });
-  }, [loading]);
+  }, [loading, profile]);
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -68,6 +70,7 @@ const EditProfile = ({ history }) => {
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Create Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
@@ -232,9 +235,9 @@ const EditProfile = ({ history }) => {
           </Fragment>
         )}
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
-        </a>
+        </Link>
       </form>
     </Fragment>
   );
