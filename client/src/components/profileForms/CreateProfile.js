@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createProfile } from '../../redux';
 import PropTypes from 'prop-types';
 
-const CreateProfile = () => {
+const CreateProfile = ({ history }) => {
   const [toggleSocial, setToggleSocial] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const CreateProfile = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(createProfile(formData));
+    dispatch(createProfile(formData, history));
   };
 
   const {
@@ -220,7 +220,8 @@ const CreateProfile = () => {
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default CreateProfile;

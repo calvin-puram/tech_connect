@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createProfile } from '../../redux';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProfile, getProfile } from '../../redux';
 import PropTypes from 'prop-types';
 
-const EditProfile = () => {
+const EditProfile = ({ history }) => {
   const [toggleSocial, setToggleSocial] = useState(false);
+  const { profile, loading } = useSelector(state => state.profile);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     company: '',
@@ -21,13 +22,33 @@ const EditProfile = () => {
     instagram: ''
   });
 
+  useEffect(() => {
+    getProfile();
+
+    setFormData({
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      status: loading || !profile.status ? '' : profile.status,
+      skills: loading || !profile.skills ? '' : profile.skills.join(','),
+      githubusername:
+        loading || !profile.githubusername ? '' : profile.githubusername,
+      bio: loading || !profile.bio ? '' : profile.bio,
+      twitter: loading || !profile.social ? '' : profile.social.twitter,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
+      linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+      youtube: loading || !profile.social ? '' : profile.social.youtube,
+      instagram: loading || !profile.social ? '' : profile.social.instagram
+    });
+  }, [loading]);
+
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(createProfile(formData));
+    dispatch(createProfile(formData, history, true));
   };
 
   const {
@@ -220,7 +241,8 @@ const EditProfile = () => {
 };
 
 EditProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default EditProfile;
