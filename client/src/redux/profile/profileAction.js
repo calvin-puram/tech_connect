@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   PROFILE_FAILURE,
   CREATE_PROFILE,
-  CREATE_EXPERIENCE
+  CREATE_EXPERIENCE,
+  CREATE_EDUCATION
 } from './profileTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -78,6 +79,34 @@ export const addExperince = (data, history) => async dispatch => {
       });
 
       dispatch(setAlert('profile experince added successfully!', 'success'));
+    }
+    history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.error;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+
+    dispatch({
+      type: PROFILE_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// add education
+export const addEducation = (data, history) => async dispatch => {
+  const body = JSON.stringify(data);
+  try {
+    const res = await api.put('/profile/education', body);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: CREATE_EDUCATION,
+        payload: res.data.data
+      });
+
+      dispatch(setAlert('profile education added successfully!', 'success'));
     }
     history.push('/dashboard');
   } catch (err) {
