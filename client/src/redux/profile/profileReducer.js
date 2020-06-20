@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   PROFILE_FAILURE,
   CLEAR_PROFILE,
-  CREATE_PROFILE
+  CREATE_PROFILE,
+  CREATE_EXPERIENCE
 } from './profileTypes';
 
 const initState = {
@@ -29,6 +30,7 @@ export const profile = (state = initState, action) => {
         profile: null
       };
     case CREATE_PROFILE:
+    case CREATE_EXPERIENCE:
       return {
         ...state,
         loading: false,

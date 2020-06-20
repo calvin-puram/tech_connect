@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addExperince } from '../../redux';
+import PropTypes from 'prop-types';
 
-const AddExperience = () => {
+const AddExperience = ({ history }) => {
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -12,13 +15,15 @@ const AddExperience = () => {
     description: ''
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(formData.current);
+    dispatch(addExperince(formData, history));
   };
 
   const { company, title, location, from, to, current, description } = formData;
@@ -97,6 +102,10 @@ const AddExperience = () => {
       </form>
     </Fragment>
   );
+};
+
+AddExperience.propTypes = {
+  history: PropTypes.object.isRequired
 };
 
 export default AddExperience;
