@@ -1,4 +1,9 @@
-import { GET_PROFILE, PROFILE_FAILURE } from './profileTypes';
+import {
+  GET_PROFILE,
+  PROFILE_FAILURE,
+  CLEAR_PROFILE,
+  CREATE_PROFILE
+} from './profileTypes';
 
 const initState = {
   profile: null,
@@ -22,6 +27,22 @@ export const profile = (state = initState, action) => {
         loading: false,
         error: action.payload,
         profile: null
+      };
+    case CREATE_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        profile: action.payload
+      };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        profile: null,
+        profiles: [],
+        repos: []
       };
     default:
       return state;

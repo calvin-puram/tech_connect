@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createProfile } from '../../redux';
+import PropTypes from 'prop-types';
 
 const CreateProfile = () => {
   const [toggleSocial, setToggleSocial] = useState(false);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -23,7 +27,7 @@ const CreateProfile = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(createProfile(formData));
   };
 
   const {
@@ -213,6 +217,10 @@ const CreateProfile = () => {
       </form>
     </Fragment>
   );
+};
+
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired
 };
 
 export default CreateProfile;
