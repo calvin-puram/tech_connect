@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../layouts/Spinner';
 import Alert from '../layouts/Alert';
+import DashboardActions from './DashBoardActions';
 
 const Dashboard = ({
   profile: { profile, loading },
@@ -26,7 +27,9 @@ const Dashboard = ({
           <i className="fas fa-user" /> Welcome {user && user.name}
         </p>
         {!loading && profile !== null ? (
-          <h1>has</h1>
+          <Fragment>
+            <DashboardActions />
+          </Fragment>
         ) : (
           <Fragment>
             <p>You have not yet setup a profile, please add some info</p>

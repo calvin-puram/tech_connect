@@ -25,7 +25,11 @@ export const getProfile = () => async dispatch => {
   }
 };
 
-export const createProfile = data => async dispatch => {
+export const createProfile = (
+  data,
+  history,
+  edit = false
+) => async dispatch => {
   const body = JSON.stringify(data);
   try {
     const res = await api.post('/profile', body);
@@ -35,6 +39,14 @@ export const createProfile = data => async dispatch => {
         type: CREATE_PROFILE,
         payload: res.data.data
       });
+
+      dispatch(
+        setAlert(edit ? 'profile updated' : 'profile created', 'success')
+      );
+    }
+
+    if (!edit) {
+      history.push('/dashboard');
     }
   } catch (err) {
     const errors = err.response.data.error;
