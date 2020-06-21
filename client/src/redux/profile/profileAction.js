@@ -9,7 +9,8 @@ import {
   CREATE_EDUCATION,
   DELETE_EXPERIENCE,
   DELETE_EDUCATION,
-  DELETE_ACCOUNT
+  DELETE_ACCOUNT,
+  GITHUB_PROFILE
 } from './profileTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -27,14 +28,13 @@ export const getProfile = () => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -51,14 +51,13 @@ export const getProfiles = () => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -75,14 +74,36 @@ export const getSingleUserProfile = userId => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+
+// get  profile github
+export const getProfileGithub = userName => async dispatch => {
+  try {
+    const res = await api.get(`/profile/github/${userName}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: GITHUB_PROFILE,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch({
+      type: PROFILE_FAILURE,
+      payload: errors
+    });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -109,14 +130,13 @@ export const createProfile = (
     history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -137,14 +157,13 @@ export const addExperince = (data, history) => async dispatch => {
     history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -163,14 +182,13 @@ export const deleteExperince = expId => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -191,14 +209,13 @@ export const addEducation = (data, history) => async dispatch => {
     history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -217,14 +234,13 @@ export const deleteEducation = eduId => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-
     dispatch({
       type: PROFILE_FAILURE,
       payload: errors
     });
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
   }
 };
 
@@ -242,14 +258,13 @@ export const deleteAccount = () => async dispatch => {
       }
     } catch (err) {
       const errors = err.response.data.error;
-      if (errors) {
-        dispatch(setAlert(errors, 'danger'));
-      }
-
       dispatch({
         type: PROFILE_FAILURE,
         payload: errors
       });
+      if (errors) {
+        dispatch(setAlert(errors, 'danger'));
+      }
     }
   }
 };

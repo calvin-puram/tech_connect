@@ -14,6 +14,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
     return <Spinner loading={loading} />;
   } else {
     return (
+      !loading &&
       profiles.length > 0 && (
         <Fragment>
           <h1 className="large text-primary">Developers</h1>

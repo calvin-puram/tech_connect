@@ -72,9 +72,9 @@ export const login = data => async dispatch => {
 };
 
 export const logout = () => dispatch => {
-  dispatch({
-    type: CLEAR_PROFILE
-  });
+  // dispatch({
+  //   type: CLEAR_PROFILE
+  // });
 
   dispatch({
     type: LOGOUT

@@ -8,6 +8,7 @@ import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import PropTypes from 'prop-types';
+import ProfileGithub from './ProfileGithub';
 
 const Profile = ({
   profile: { profile, loading },
@@ -38,8 +39,8 @@ const Profile = ({
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
             {/* Experience  */}
-            <div class="profile-exp bg-white p-2">
-              <h2 class="text-primary">Experience</h2>
+            <div className="profile-exp bg-white p-2">
+              <h2 className="text-primary">Experience</h2>
               {profile !== null && profile.experience.length > 0 ? (
                 <Fragment>
                   {profile.experience.map(exp => {
@@ -51,8 +52,8 @@ const Profile = ({
               )}
             </div>
             {/* Education  */}
-            <div class="profile-edu bg-white p-2">
-              <h2 class="text-primary">Education</h2>
+            <div className="profile-edu bg-white p-2">
+              <h2 className="text-primary">Education</h2>
               {profile !== null && profile.education.length > 0 ? (
                 <Fragment>
                   {profile.education.map(edu => {
@@ -63,6 +64,9 @@ const Profile = ({
                 <h4>No education credentials</h4>
               )}
             </div>
+            {profile.githubusername && (
+              <ProfileGithub userName={profile.githubusername} />
+            )}
           </div>
         </Fragment>
       )

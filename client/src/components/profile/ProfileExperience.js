@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const ProfileExperience = ({ exp }) => {
   return (
     <div>
-      <h3 class="text-dark">{exp.company}</h3>
+      <h3 className="text-dark">{exp.company}</h3>
       <p>
         <Moment format="YYYY/MM/DD">{moment.utc(exp.from)}</Moment> -{' '}
         {!exp.to ? (
