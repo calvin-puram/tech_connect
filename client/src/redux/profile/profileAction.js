@@ -3,7 +3,8 @@ import {
   PROFILE_FAILURE,
   CREATE_PROFILE,
   CREATE_EXPERIENCE,
-  CREATE_EDUCATION
+  CREATE_EDUCATION,
+  DELETE_EXPERIENCE
 } from './profileTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -81,6 +82,32 @@ export const addExperince = (data, history) => async dispatch => {
       dispatch(setAlert('profile experince added successfully!', 'success'));
     }
     history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.error;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+
+    dispatch({
+      type: PROFILE_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// delete experience
+export const deleteExperince = expId => async dispatch => {
+  try {
+    const res = await api.delete(`/profile/experience/${expId}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: DELETE_EXPERIENCE,
+        payload: res.data.data
+      });
+
+      dispatch(setAlert('profile experience remove successfully!', 'success'));
+    }
   } catch (err) {
     const errors = err.response.data.error;
     if (errors) {
