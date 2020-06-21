@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import spinner from './spinner.gif';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-const Spinner = ({ loading }) => {
+
+
+const Spinner = ({loading}) => {
   return (
     loading && (
       <Fragment>
@@ -14,10 +16,10 @@ const Spinner = ({ loading }) => {
       </Fragment>
     )
   );
-};
+}
 
 Spinner.propTypes = {
-  loading: PropTypes.bool.isRequired
-};
+  loading: PropTypes.bool.isRequired,
+}
 
 export default Spinner;

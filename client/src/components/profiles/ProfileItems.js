@@ -16,14 +16,17 @@ const ProfileItems = ({ profile }) => {
             <h2>{profile.user.name}</h2>
             <p>Developer at {profile.company}</p>
             <p>{profile.location}</p>
-            <Link to="/profile" className="btn btn-primary">
+            <Link
+              to={`/profile/${profile.user._id}`}
+              className="btn btn-primary"
+            >
               View Profile
             </Link>
           </div>
 
           <ul>
             {profile.skills.map(skill => (
-              <li className="text-primary" key={skill._id}>
+              <li className="text-primary" key={skill}>
                 <i className="fas fa-check"></i> {skill}
               </li>
             ))}

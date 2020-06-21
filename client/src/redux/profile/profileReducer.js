@@ -1,6 +1,7 @@
 import {
   GET_PROFILE,
   PROFILE_FAILURE,
+  GET_SINGLE_PROFILE,
   CLEAR_PROFILE,
   CREATE_PROFILE,
   CREATE_EXPERIENCE,
@@ -44,6 +45,7 @@ export const profile = (state = initState, action) => {
     case CREATE_EDUCATION:
     case DELETE_EXPERIENCE:
     case DELETE_EDUCATION:
+    case GET_SINGLE_PROFILE:
       return {
         ...state,
         loading: false,

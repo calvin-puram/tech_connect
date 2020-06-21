@@ -1,6 +1,7 @@
 import {
   GET_PROFILE,
   GET_PROFILES,
+  GET_SINGLE_PROFILE,
   PROFILE_FAILURE,
   CREATE_PROFILE,
   CREATE_EXPERIENCE,
@@ -45,6 +46,30 @@ export const getProfiles = () => async dispatch => {
     if (res && res.data.success) {
       dispatch({
         type: GET_PROFILES,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+
+    dispatch({
+      type: PROFILE_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// get single user profile
+export const getSingleUserProfile = userId => async dispatch => {
+  try {
+    const res = await api.get(`/profile/user/${userId}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: GET_SINGLE_PROFILE,
         payload: res.data.data
       });
     }
