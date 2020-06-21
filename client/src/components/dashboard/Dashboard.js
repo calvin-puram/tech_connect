@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../layouts/Spinner';
 import Alert from '../layouts/Alert';
 import DashboardActions from './DashBoardActions';
+import Experience from './Experience';
 
 const Dashboard = ({
   profile: { profile, loading },
@@ -29,6 +30,7 @@ const Dashboard = ({
         {!loading && profile !== null ? (
           <Fragment>
             <DashboardActions />
+            <Experience />
           </Fragment>
         ) : (
           <Fragment>
