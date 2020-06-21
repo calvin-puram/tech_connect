@@ -6,6 +6,8 @@ import {
   AUTH_ERROR
 } from './authTypes';
 
+import { DELETE_ACCOUNT } from '../profile/profileTypes';
+
 const initState = {
   user: null,
   loading: true,
@@ -37,6 +39,7 @@ export const auth = (state = initState, action) => {
         loading: false
       };
     case AUTH_ERROR:
+    case DELETE_ACCOUNT:
     case LOGOUT:
       return {
         ...state,

@@ -1,11 +1,14 @@
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_FAILURE,
   CREATE_PROFILE,
   CREATE_EXPERIENCE,
+  CLEAR_PROFILE,
   CREATE_EDUCATION,
   DELETE_EXPERIENCE,
-  DELETE_EDUCATION
+  DELETE_EDUCATION,
+  DELETE_ACCOUNT
 } from './profileTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -18,6 +21,30 @@ export const getProfile = () => async dispatch => {
     if (res && res.data.success) {
       dispatch({
         type: GET_PROFILE,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+
+    dispatch({
+      type: PROFILE_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// get profiles
+export const getProfiles = () => async dispatch => {
+  try {
+    const res = await api.get('/profile/');
+
+    if (res && res.data.success) {
+      dispatch({
+        type: GET_PROFILES,
         payload: res.data.data
       });
     }
@@ -173,5 +200,31 @@ export const deleteEducation = eduId => async dispatch => {
       type: PROFILE_FAILURE,
       payload: errors
     });
+  }
+};
+
+// delete account
+export const deleteAccount = () => async dispatch => {
+  if (window.confirm('are you sure you want to perform this action?')) {
+    try {
+      const res = await api.delete(`/profile`);
+
+      if (res && res.data.success) {
+        dispatch({ type: CLEAR_PROFILE });
+        dispatch({ type: DELETE_ACCOUNT });
+
+        dispatch(setAlert('your account is deleted successfully!', 'success'));
+      }
+    } catch (err) {
+      const errors = err.response.data.error;
+      if (errors) {
+        dispatch(setAlert(errors, 'danger'));
+      }
+
+      dispatch({
+        type: PROFILE_FAILURE,
+        payload: errors
+      });
+    }
   }
 };

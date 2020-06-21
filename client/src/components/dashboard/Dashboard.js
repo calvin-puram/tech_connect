@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getProfile } from '../../redux';
+import { getProfile, deleteAccount } from '../../redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../layouts/Spinner';
@@ -12,7 +12,8 @@ import Education from './Education';
 const Dashboard = ({
   profile: { profile, loading },
   auth: { user },
-  getProfile
+  getProfile,
+  deleteAccount
 }) => {
   useEffect(() => {
     getProfile();
@@ -33,6 +34,12 @@ const Dashboard = ({
             <DashboardActions />
             <Experience />
             <Education />
+            <div className="my-2">
+              <button className="btn btn-danger" onClick={deleteAccount}>
+                <i className="fas fa-user-minus"></i>
+                Delete My Account
+              </button>
+            </div>
           </Fragment>
         ) : (
           <Fragment>
@@ -56,13 +63,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProfile: () => dispatch(getProfile())
+    getProfile: () => dispatch(getProfile()),
+    deleteAccount: () => dispatch(deleteAccount())
   };
 };
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  getProfile: PropTypes.func.isRequired
+  getProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

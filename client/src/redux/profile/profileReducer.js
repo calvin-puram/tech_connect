@@ -6,7 +6,8 @@ import {
   CREATE_EXPERIENCE,
   CREATE_EDUCATION,
   DELETE_EXPERIENCE,
-  DELETE_EDUCATION
+  DELETE_EDUCATION,
+  GET_PROFILES
 } from './profileTypes';
 
 const initState = {
@@ -24,6 +25,12 @@ export const profile = (state = initState, action) => {
         ...state,
         loading: false,
         profile: action.payload
+      };
+    case GET_PROFILES:
+      return {
+        ...state,
+        loading: false,
+        profiles: action.payload
       };
     case PROFILE_FAILURE:
       return {
