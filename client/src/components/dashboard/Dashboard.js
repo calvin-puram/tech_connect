@@ -7,6 +7,7 @@ import Spinner from '../layouts/Spinner';
 import Alert from '../layouts/Alert';
 import DashboardActions from './DashBoardActions';
 import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({
   profile: { profile, loading },
@@ -31,6 +32,7 @@ const Dashboard = ({
           <Fragment>
             <DashboardActions />
             <Experience />
+            <Education />
           </Fragment>
         ) : (
           <Fragment>
