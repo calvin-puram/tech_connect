@@ -5,7 +5,8 @@ import {
   CREATE_PROFILE,
   CREATE_EXPERIENCE,
   CREATE_EDUCATION,
-  DELETE_EXPERIENCE
+  DELETE_EXPERIENCE,
+  DELETE_EDUCATION
 } from './profileTypes';
 
 const initState = {
@@ -35,6 +36,7 @@ export const profile = (state = initState, action) => {
     case CREATE_EXPERIENCE:
     case CREATE_EDUCATION:
     case DELETE_EXPERIENCE:
+    case DELETE_EDUCATION:
       return {
         ...state,
         loading: false,
