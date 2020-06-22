@@ -8,8 +8,6 @@ import {
   AUTH_ERROR
 } from './authTypes';
 
-import { CLEAR_PROFILE } from '../profile/profileTypes';
-
 export const loadUser = () => async dispatch => {
   try {
     const res = await api.get('/auth/me');
