@@ -3,20 +3,31 @@ import {
   POST_FAILURE,
   GET_POSTS,
   LIKE_POSTS,
+  GET_POST,
   UNLIKE_POSTS,
   POST_LIKE_FAILURE,
-  DELETE_POST
+  DELETE_POST,
+  POST_COMMENT,
+  DELETE_COMMENT
 } from './postsTypes';
 
 const initState = {
   posts: [],
-  post: null,
+  post: {},
   loading: true,
   error: {}
 };
 
 export const posts = (state = initState, action) => {
   switch (action.type) {
+    case DELETE_COMMENT:
+    case GET_POST:
+    case POST_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        post: action.payload
+      };
     case LIKE_POSTS:
     case UNLIKE_POSTS:
     case POST_LIKE_FAILURE:

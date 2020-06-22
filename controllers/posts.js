@@ -134,7 +134,7 @@ exports.createComment = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: post.comments
+    data: post
   });
 });
 
@@ -162,9 +162,10 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
   );
 
   await post.save();
+  const newPost = await Post.findById(req.params.id);
 
   res.status(200).json({
     success: true,
-    data: post.comments
+    data: newPost
   });
 });

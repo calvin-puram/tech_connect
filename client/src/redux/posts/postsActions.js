@@ -5,7 +5,10 @@ import {
   LIKE_POSTS,
   POST_LIKE_FAILURE,
   UNLIKE_POSTS,
-  DELETE_POST
+  DELETE_POST,
+  GET_POST,
+  POST_COMMENT,
+  DELETE_COMMENT
 } from './postsTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -18,6 +21,67 @@ export const getPosts = () => async dispatch => {
     if (res && res.data.success) {
       dispatch({
         type: GET_POSTS,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch({
+      type: POST_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// get post
+export const getPost = postId => async dispatch => {
+  try {
+    const res = await api.get(`/posts/${postId}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: GET_POST,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch({
+      type: POST_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+//  post comment
+export const postComment = (postId, text) => async dispatch => {
+  const body = JSON.stringify(text);
+  try {
+    const res = await api.post(`/posts/comment/${postId}`, body);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: POST_COMMENT,
+        payload: res.data.data
+      });
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch({
+      type: POST_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+//  delete comment
+export const deleteComment = (postId, commentId) => async dispatch => {
+  try {
+    const res = await api.delete(`/posts/comment/${postId}/${commentId}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: DELETE_COMMENT,
         payload: res.data.data
       });
     }

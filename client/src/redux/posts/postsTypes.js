@@ -5,3 +5,6 @@ export const LIKE_POSTS = 'LIKE_POSTS';
 export const POST_LIKE_FAILURE = 'POST_LIKE_FAILURE';
 export const UNLIKE_POSTS = 'UNLIKE_POSTS';
 export const DELETE_POST = 'DELETE_POST';
+export const GET_POST = 'GET_POST';
+export const POST_COMMENT = 'POST_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
