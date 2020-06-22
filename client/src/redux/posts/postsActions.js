@@ -1,4 +1,12 @@
-import { CREATE_POST, POST_FAILURE, GET_POSTS } from './postsTypes';
+import {
+  CREATE_POST,
+  POST_FAILURE,
+  GET_POSTS,
+  LIKE_POSTS,
+  POST_LIKE_FAILURE,
+  UNLIKE_POSTS,
+  DELETE_POST
+} from './postsTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
 
@@ -21,6 +29,47 @@ export const getPosts = () => async dispatch => {
     });
   }
 };
+
+// like post
+export const addLikes = postId => async dispatch => {
+  const res = await api.put(`/posts/like/${postId}`);
+
+  if (res && res.data.success) {
+    dispatch({
+      type: LIKE_POSTS,
+      payload: { postId, likes: res.data.data }
+    });
+  }
+
+  if (res && res.data.success === false) {
+    dispatch({
+      type: POST_LIKE_FAILURE,
+      payload: { postId, likes: res.data.data }
+    });
+    dispatch(setAlert('Post Already Liked', 'success'));
+  }
+};
+
+// unlike post
+export const unLikePost = postId => async dispatch => {
+  const res = await api.put(`/posts/unlike/${postId}`);
+
+  if (res && res.data.success) {
+    dispatch({
+      type: UNLIKE_POSTS,
+      payload: { postId, likes: res.data.data }
+    });
+  }
+
+  if (res && res.data.success === false) {
+    dispatch({
+      type: POST_LIKE_FAILURE,
+      payload: { postId, likes: res.data.data }
+    });
+    dispatch(setAlert('Post Already unLiked', 'success'));
+  }
+};
+
 // create post
 export const createPost = data => async dispatch => {
   const body = JSON.stringify(data);
@@ -34,6 +83,26 @@ export const createPost = data => async dispatch => {
       });
 
       dispatch(setAlert('post created successfully!', 'success'));
+    }
+  } catch (err) {
+    const errors = err.response.data.error;
+    dispatch({
+      type: POST_FAILURE,
+      payload: errors
+    });
+  }
+};
+
+// delete post
+export const deletePost = postId => async dispatch => {
+  try {
+    const res = await api.delete(`/posts/${postId}`);
+
+    if (res && res.data.success) {
+      dispatch({
+        type: DELETE_POST,
+        payload: res.data.data
+      });
     }
   } catch (err) {
     const errors = err.response.data.error;

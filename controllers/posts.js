@@ -64,10 +64,10 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   }
 
   await post.remove();
-
+  const posts = await Post.find();
   res.status(200).json({
     success: true,
-    msg: 'Post removed'
+    data: posts
   });
 });
 
