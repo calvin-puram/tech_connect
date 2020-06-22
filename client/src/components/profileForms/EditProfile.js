@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createProfile, getProfile } from '../../redux';
 import PropTypes from 'prop-types';
-import Alert from '../layouts/Alert';
 
 const EditProfile = ({ history }) => {
   const [toggleSocial, setToggleSocial] = useState(false);
@@ -70,7 +69,6 @@ const EditProfile = ({ history }) => {
 
   return (
     <Fragment>
-      <Alert />
       <h1 className="large text-primary">Create Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your

@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, setAlert } from '../../redux';
-import Alert from '../layouts/Alert';
 import PropTypes from 'prop-types';
 
 const Register = props => {
@@ -43,7 +42,6 @@ const Register = props => {
 
   return (
     <Fragment>
-      <Alert />
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account

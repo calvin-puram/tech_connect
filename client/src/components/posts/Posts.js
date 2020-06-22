@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import PostForm from './PostForm';
-import Alert from '../layouts/Alert';
 import { connect } from 'react-redux';
 import { getPosts } from '../../redux';
 import PropTypes from 'prop-types';
@@ -13,7 +12,6 @@ const Posts = ({ posts, getPosts }) => {
 
   return (
     <Fragment>
-      <Alert />
       <h1 className="large text-primary">Posts</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Welcome to the community!

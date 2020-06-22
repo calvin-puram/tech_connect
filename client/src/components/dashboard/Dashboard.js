@@ -4,7 +4,6 @@ import { getProfile, deleteAccount } from '../../redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../layouts/Spinner';
-import Alert from '../layouts/Alert';
 import DashboardActions from './DashBoardActions';
 import Experience from './Experience';
 import Education from './Education';
@@ -25,7 +24,6 @@ const Dashboard = ({
     return (
       !loading && (
         <Fragment>
-          <Alert />
           <h1 className="large text-primary">Dashboard</h1>
           <p className="lead">
             <i className="fas fa-user" /> Welcome {user && user.name}
