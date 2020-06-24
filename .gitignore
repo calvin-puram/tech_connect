@@ -13,7 +13,7 @@ config/config.env.env
 /client/coverage
 
 # production
-/client/build
+# /client/build
 
 # misc
 /client.DS_Store
