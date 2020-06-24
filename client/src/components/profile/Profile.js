@@ -17,13 +17,14 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getSingleUserProfile();
-  }, [getSingleUserProfile]);
+  }, [getSingleUserProfile, loading]);
 
   if (loading && profile === null) {
     return <Spinner loading={loading} />;
   } else {
     return (
-      profile !== null && (
+      profile !== null &&
+      !loading && (
         <Fragment>
           <Link to="/profiles" className="btn btn-light">
             Back To Profiles
@@ -64,9 +65,9 @@ const Profile = ({
                 <h4>No education credentials</h4>
               )}
             </div>
-            {/* {profile.githubusername && (
+            {profile.githubusername && (
               <ProfileGithub userName={profile.githubusername} />
-            )} */}
+            )}
           </div>
         </Fragment>
       )

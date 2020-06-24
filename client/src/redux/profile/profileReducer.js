@@ -9,7 +9,8 @@ import {
   DELETE_EXPERIENCE,
   DELETE_EDUCATION,
   GITHUB_PROFILE,
-  GET_PROFILES
+  GET_PROFILES,
+  GITHUB_FAILURE
 } from './profileTypes';
 
 const initState = {
@@ -41,6 +42,14 @@ export const profile = (state = initState, action) => {
         error: action.payload,
         profile: null
       };
+    case GITHUB_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        repos: [],
+        error: action.payload
+      };
+
     case CREATE_PROFILE:
     case CREATE_EXPERIENCE:
     case CREATE_EDUCATION:

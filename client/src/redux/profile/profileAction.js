@@ -10,7 +10,8 @@ import {
   DELETE_EXPERIENCE,
   DELETE_EDUCATION,
   DELETE_ACCOUNT,
-  GITHUB_PROFILE
+  GITHUB_PROFILE,
+  GITHUB_FAILURE
 } from './profileTypes';
 import api from '../../utils/api';
 import { setAlert } from '../alert/alertAction';
@@ -74,11 +75,12 @@ export const getSingleUserProfile = userId => async dispatch => {
     }
   } catch (err) {
     const errors = err.response.data.error;
-    dispatch({
-      type: PROFILE_FAILURE,
-      payload: errors
-    });
+
     if (errors) {
+      dispatch({
+        type: PROFILE_FAILURE,
+        payload: errors
+      });
       dispatch(setAlert(errors, 'danger'));
     }
   }
@@ -98,12 +100,9 @@ export const getProfileGithub = userName => async dispatch => {
   } catch (err) {
     const errors = err.response.data.error;
     dispatch({
-      type: PROFILE_FAILURE,
+      type: GITHUB_FAILURE,
       payload: errors
     });
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
   }
 };
 
